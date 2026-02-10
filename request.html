@@ -103,7 +103,7 @@
       <input type="text" id="name" required placeholder="e.g., Jane Doe">
 
       <label for="phone">Phone / WhatsApp *</label>
-      <input type="tel" id="phone" required placeholder="e.g., 0717677811">
+      <input type="tel" id="phone" required placeholder="e.g., 0729324242">
 
       <label for="address">Pickup Address in Nakuru *</label>
       <textarea id="address" rows="3" required placeholder="e.g., Section 58, Milimani, or your estate"></textarea>
@@ -136,9 +136,9 @@
       // Generate order ID
       const orderId = 'SMW-' + Math.floor(10000 + Math.random() * 90000);
 
-      // Format WhatsApp message (to the laundry owner)
+      // Format WhatsApp message (sent to YOUR number for testing)
       const message = 
-        `*New Laundry Pickup Request!* 🚀\n\n` +
+        `*New Laundry Pickup Request (TEST)* 🚀\n\n` +
         `Order ID: ${orderId}\n` +
         `Name: ${name}\n` +
         `Phone/WhatsApp: ${phone}\n` +
@@ -146,25 +146,25 @@
         `Preferred Date: ${date}\n` +
         `Items / Description: ${items}\n` +
         `Special Instructions: ${instructions}\n\n` +
-        `Please reply to confirm pickup schedule. Thank you!`;
+        `This is a test submission from the demo site.`;
 
       // Encode for URL safety
       const encodedMessage = encodeURIComponent(message);
 
-      // Your WhatsApp number (international format without +)
-      const waNumber = '254717677811';
+      // YOUR WhatsApp number (international format without +)
+      const waNumber = '254729324242';
 
       // Open WhatsApp with pre-filled message
       const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
       window.open(waUrl, '_blank');
 
-      // Success message for the client
+      // Success message for the person testing
       alert(
-        `Thank you! Your request has been submitted.\n\n` +
+        `Test submission successful!\n\n` +
         `Order ID: ${orderId}\n` +
-        `Details have been sent to Super Machine Wash via WhatsApp.\n` +
-        `We'll contact you soon to confirm pickup.\n\n` +
-        `You can track your order here: track.html using your Order ID.`
+        `A pre-filled WhatsApp message has opened to your number (+254729324242).\n` +
+        `Send it to see the notification arrive on your phone.\n\n` +
+        `In the real version for Super Machine Wash, this would go directly to their number.`
       );
 
       // Save to localStorage for demo tracking
@@ -179,7 +179,7 @@
   </script>
 
   <footer>
-    <p>© 2026 Super Machine Wash | Nakuru, Kenya | Call/WhatsApp: +254 717 677 811</p>
+    <p>© 2026 Super Machine Wash Demo | Nakuru, Kenya</p>
   </footer>
 
 </body>
