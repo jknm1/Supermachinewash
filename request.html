@@ -5,18 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Request Free Pickup - Super Machine Wash</title>
   <style>
-    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; --accent: #25D366; }
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: var(--light); color: var(--dark); }
-    header { background: var(--primary); color:white; text-align:center; padding:1.5rem 1rem; }
-    nav { background:#0056b3; padding:1rem; text-align:center; }
-    nav a { color:white; margin:0 1rem; text-decoration:none; font-weight:bold; }
-    section { padding:2rem 1rem; max-width:800px; margin:auto; }
-    form { background:white; padding:2rem; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    label { display:block; margin:1.2rem 0 0.4rem; font-weight:bold; }
-    input, select, textarea { width:100%; padding:0.8rem; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
-    .btn { background:var(--primary); color:white; padding:1rem; border:none; border-radius:5px; font-size:1.1rem; cursor:pointer; width:100%; margin-top:1rem; }
-    .btn:hover { background:#0056b3; }
-    footer { background:var(--dark); color:white; text-align:center; padding:1rem; margin-top:2rem; }
+    :root { 
+      --primary: #007bff; 
+      --light: #f8f9fa; 
+      --dark: #333; 
+      --accent: #25D366; 
+    }
+    body { 
+      font-family: Arial, sans-serif; 
+      margin:0; 
+      padding:0; 
+      background: var(--light); 
+      color: var(--dark); 
+    }
+    header { 
+      background: var(--primary); 
+      color:white; 
+      text-align:center; 
+      padding:1.5rem 1rem; 
+    }
+    nav { 
+      background:#0056b3; 
+      padding:1rem; 
+      text-align:center; 
+    }
+    nav a { 
+      color:white; 
+      margin:0 1rem; 
+      text-decoration:none; 
+      font-weight:bold; 
+    }
+    section { 
+      padding:2rem 1rem; 
+      max-width:800px; 
+      margin:auto; 
+    }
+    form { 
+      background:white; 
+      padding:2rem; 
+      border-radius:8px; 
+      box-shadow:0 2px 10px rgba(0,0,0,0.1); 
+    }
+    label { 
+      display:block; 
+      margin:1.2rem 0 0.4rem; 
+      font-weight:bold; 
+    }
+    input, select, textarea { 
+      width:100%; 
+      padding:0.8rem; 
+      border:1px solid #ccc; 
+      border-radius:4px; 
+      box-sizing:border-box; 
+    }
+    .btn { 
+      background:var(--primary); 
+      color:white; 
+      padding:1rem; 
+      border:none; 
+      border-radius:5px; 
+      font-size:1.1rem; 
+      cursor:pointer; 
+      width:100%; 
+      margin-top:1rem; 
+    }
+    .btn:hover { 
+      background:#0056b3; 
+    }
+    footer { 
+      background:var(--dark); 
+      color:white; 
+      text-align:center; 
+      padding:1rem; 
+      margin-top:2rem; 
+    }
   </style>
 </head>
 <body>
@@ -29,6 +91,7 @@
     <a href="index.html">Home</a>
     <a href="request.html">Request Pickup</a>
     <a href="track.html">Track Order</a>
+    <a href="reviews.html">Reviews</a>
   </nav>
 
   <section>
@@ -37,7 +100,7 @@
     
     <form id="requestForm">
       <label for="name">Full Name *</label>
-      <input type="text" id="name" required>
+      <input type="text" id="name" required placeholder="e.g., Jane Doe">
 
       <label for="phone">Phone / WhatsApp *</label>
       <input type="tel" id="phone" required placeholder="e.g., 0717677811">
@@ -61,14 +124,56 @@
   <script>
     document.getElementById('requestForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      // Collect form values
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const date = document.getElementById('date').value || 'Not specified';
+      const items = document.getElementById('items').value.trim() || 'Not specified';
+      const instructions = document.getElementById('instructions').value.trim() || 'None';
+
+      // Generate order ID
       const orderId = 'SMW-' + Math.floor(10000 + Math.random() * 90000);
-      alert(`Thank you! Your request has been submitted.\n\nOrder ID: ${orderId}\nWe'll contact you soon via WhatsApp/call to confirm pickup.\n\nTrack progress here: track.html using your Order ID.`);
-      
-      // Save mock data to localStorage for tracking demo
+
+      // Format WhatsApp message (to the laundry owner)
+      const message = 
+        `*New Laundry Pickup Request!* 🚀\n\n` +
+        `Order ID: ${orderId}\n` +
+        `Name: ${name}\n` +
+        `Phone/WhatsApp: ${phone}\n` +
+        `Pickup Address: ${address}\n` +
+        `Preferred Date: ${date}\n` +
+        `Items / Description: ${items}\n` +
+        `Special Instructions: ${instructions}\n\n` +
+        `Please reply to confirm pickup schedule. Thank you!`;
+
+      // Encode for URL safety
+      const encodedMessage = encodeURIComponent(message);
+
+      // Your WhatsApp number (international format without +)
+      const waNumber = '254717677811';
+
+      // Open WhatsApp with pre-filled message
+      const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+      window.open(waUrl, '_blank');
+
+      // Success message for the client
+      alert(
+        `Thank you! Your request has been submitted.\n\n` +
+        `Order ID: ${orderId}\n` +
+        `Details have been sent to Super Machine Wash via WhatsApp.\n` +
+        `We'll contact you soon to confirm pickup.\n\n` +
+        `You can track your order here: track.html using your Order ID.`
+      );
+
+      // Save to localStorage for demo tracking
       localStorage.setItem(orderId, JSON.stringify({
         status: 'Pending',
         steps: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered']
       }));
+
+      // Reset form
       this.reset();
     });
   </script>
