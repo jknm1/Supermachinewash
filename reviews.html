@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Reviews - Super Machine Wash</title>
+  <style>
+    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; --accent: #25D366; --star: #ffc107; }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background: var(--light); color: var(--dark); }
+    header { background: var(--primary); color:white; text-align:center; padding:1.5rem 1rem; }
+    nav { background:#0056b3; padding:1rem; text-align:center; }
+    nav a { color:white; margin:0 1rem; text-decoration:none; font-weight:bold; }
+    section { padding:2rem 1rem; max-width:900px; margin:auto; }
+    h2 { text-align:center; }
+    form { background:white; padding:2rem; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); margin-bottom:2rem; }
+    label { display:block; margin:1.2rem 0 0.4rem; font-weight:bold; }
+    input, textarea, select { width:100%; padding:0.8rem; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
+    .rating { font-size:1.8rem; margin:1rem 0; }
+    .star { color:#ddd; cursor:pointer; font-size:2rem; }
+    .star.selected { color:var(--star); }
+    .btn { background:var(--primary); color:white; padding:1rem; border:none; border-radius:5px; font-size:1.1rem; cursor:pointer; width:100%; margin-top:1rem; }
+    .btn:hover { background:#0056b3; }
+    .review-list { margin-top:2rem; }
+    .review { background:white; padding:1.5rem; border-radius:8px; box-shadow:0 1px 5px rgba(0,0,0,0.1); margin-bottom:1.5rem; }
+    .review-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; }
+    .stars { color:var(--star); font-size:1.4rem; }
+    footer { background:var(--dark); color:white; text-align:center; padding:1rem; margin-top:2rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Super Machine Wash</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="request.html">Request Pickup</a>
+    <a href="track.html">Track Order</a>
+    <a href="reviews.html">Reviews</a>
+  </nav>
+
+  <section>
+    <h2>What Our Customers Say</h2>
+    <p>Share your experience with Super Machine Wash in Nakuru! Your feedback helps us improve.</p>
+
+    <form id="reviewForm">
+      <label for="name">Your Name *</label>
+      <input type="text" id="name" required placeholder="e.g., Jane Doe">
+
+      <label>Rating *</label>
+      <div class="rating" id="ratingStars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <input type="hidden" id="rating" required>
+
+      <label for="comment">Your Review *</label>
+      <textarea id="comment" rows="5" required placeholder="Tell us about your experience..."></textarea>
+
+      <button type="submit" class="btn">Submit Review</button>
+    </form>
+
+    <div class="review-list" id="reviewList"></div>
+  </section>
+
+  <script>
+    const stars = document.querySelectorAll('#ratingStars .star');
+    const ratingInput = document.getElementById('rating');
+    let selectedRating = 0;
+
+    // Star hover & click
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = star.dataset.value;
+        ratingInput.value = selectedRating;
+        updateStars();
+      });
+      star.addEventListener('mouseover', () => {
+        highlightStars(star.dataset.value);
+      });
+      star.addEventListener('mouseout', () => {
+        highlightStars(selectedRating);
+      });
+    });
+
+    function updateStars() {
+      stars.forEach(s => {
+        s.classList.toggle('selected', s.dataset.value <= selectedRating);
+      });
+    }
+
+    function highlightStars(value) {
+      stars.forEach(s => {
+        s.classList.toggle('selected', s.dataset.value <= value);
+      });
+    }
+
+    // Load & display reviews
+    function loadReviews() {
+      const reviews = JSON.parse(localStorage.getItem('superMachineReviews')) || [];
+      const list = document.getElementById('reviewList');
+      list.innerHTML = '';
+
+      // Add 2 fake reviews on first load if empty
+      if (reviews.length === 0) {
+        const fakeReviews = [
+          { name: "Aisha M.", rating: 5, comment: "Best laundry service in Nakuru! Free pickup was on time, clothes came back smelling amazing and perfectly ironed. Highly recommend!" },
+          { name: "Kevin O.", rating: 4, comment: "Very reliable and affordable. My duvet looks brand new after their deep clean. Will use again!" }
+        ];
+        fakeReviews.forEach(r => reviews.push(r));
+        localStorage.setItem('superMachineReviews', JSON.stringify(reviews));
+      }
+
+      reviews.forEach(review => {
+        const div = document.createElement('div');
+        div.className = 'review';
+        div.innerHTML = `
+          <div class="review-header">
+            <strong>${review.name}</strong>
+            <span class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</span>
+          </div>
+          <p>${review.comment}</p>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // Submit review
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const rating = parseInt(ratingInput.value);
+      const comment = document.getElementById('comment').value.trim();
+
+      if (!name || !rating || !comment) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      const reviews = JSON.parse(localStorage.getItem('superMachineReviews')) || [];
+      reviews.push({ name, rating, comment });
+      localStorage.setItem('superMachineReviews', JSON.stringify(reviews));
+
+      alert('Thank you for your review! It has been added (visible in your browser).');
+      this.reset();
+      selectedRating = 0;
+      updateStars();
+      loadReviews();
+    });
+
+    // Initial load
+    loadReviews();
+  </script>
+
+  <footer>
+    <p>© 2026 Super Machine Wash | Nakuru, Kenya | Call/WhatsApp: +254 717 677 811</p>
+  </footer>
+
+</body>
+</html>
