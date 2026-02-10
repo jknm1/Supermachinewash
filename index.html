@@ -5,23 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Super Machine Wash - Premium Laundry in Nakuru</title>
   <style>
-    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; --accent: #25D366; }
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: var(--light); color: var(--dark); line-height:1.6; }
-    header { background: var(--primary); color:white; text-align:center; padding:2rem 1rem; }
-    header h1 { margin:0; font-size:2.5rem; }
-    nav { background:#0056b3; padding:1rem; text-align:center; }
-    nav a { color:white; margin:0 1rem; text-decoration:none; font-weight:bold; }
-    section { padding:2rem 1rem; max-width:1000px; margin:auto; }
-    .hero { background:#e9f5ff; text-align:center; padding:3rem 1rem; }
-    .btn { background:var(--primary); color:white; padding:0.8rem 1.5rem; border:none; border-radius:5px; font-size:1.1rem; cursor:pointer; text-decoration:none; display:inline-block; }
-    .btn:hover { background:#0056b3; }
-    .whatsapp-btn { background:var(--accent); }
-    .whatsapp-btn:hover { background:#128C7E; }
-    table { width:100%; border-collapse:collapse; margin:1rem 0; }
-    th, td { border:1px solid #ddd; padding:0.8rem; text-align:left; }
-    th { background:#eee; }
-    footer { background:var(--dark); color:white; text-align:center; padding:1rem; margin-top:2rem; }
-    @media (max-width:600px) { header h1 { font-size:2rem; } nav a { display:block; margin:0.5rem 0; } }
+    :root {
+      --primary: #007bff;
+      --light: #f8f9fa;
+      --dark: #333;
+      --accent: #25D366;     /* WhatsApp green */
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav {
+      background: #0056b3;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .hero {
+      background: #e9f5ff;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .whatsapp-btn {
+      background: var(--accent);
+    }
+    .whatsapp-btn:hover {
+      background: #128C7E;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+    }
+    th {
+      background: #eee;
+    }
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      nav a { display: block; margin: 0.5rem 0; }
+    }
   </style>
 </head>
 <body>
@@ -32,37 +104,61 @@
   </header>
 
   <nav>
-    <a href="#home">Home</a>
+    <a href="index.html">Home</a>
     <a href="#services">Services</a>
     <a href="request.html">Request Pickup</a>
     <a href="track.html">Track Order</a>
     <a href="reviews.html">Reviews</a>
   </nav>
 
-  <section class="hero" id="home">
+  <section class="hero">
     <h2>Laundry Made Easy in Nakuru</h2>
-    <p>We pick up, wash, dry, fold, iron & deliver — you relax! Free pickup & delivery across Nakuru. 24-48 hour turnaround.</p>
+    <p>We pick up, wash, dry, fold, iron & deliver — you relax!<br>
+       Free pickup & delivery across Nakuru. Fast 24-48 hour turnaround.</p>
     <a href="request.html" class="btn">Request Free Pickup Now</a>
     <br><br>
-    <a href="https://wa.me/254717677811?text=Hi%20Super%20Machine%20Wash!%20I'd%20like%20to%20request%20a%20free%20pickup." class="btn whatsapp-btn">Chat on WhatsApp</a>
+    <a href="https://wa.me/254717677811?text=Hi%20Super%20Machine%20Wash!%20I'd%20like%20to%20request%20a%20free%20pickup." 
+       class="btn whatsapp-btn">
+       Chat on WhatsApp
+    </a>
   </section>
 
   <section id="services">
     <h2>Our Professional Services</h2>
     <p>We handle your laundry with care at customer-friendly prices. Premium care without lifting a finger!</p>
     <table>
-      <tr><th>Service</th><th>Description</th></tr>
-      <tr><td>Wash & Fold</td><td>Fresh, clean, neatly folded — perfect everyday laundry</td></tr>
-      <tr><td>Duvet, Blanket & Quilt Cleaning</td><td>Deep cleaning for bulky items</td></tr>
-      <tr><td>Ironing & Pressing</td><td>Crisp, professional finish</td></tr>
-      <tr><td>Curtains & Special Items</td><td>Careful handling for delicates & home textiles</td></tr>
+      <tr>
+        <th>Service</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Wash & Fold</td>
+        <td>Fresh, clean, neatly folded — perfect everyday laundry</td>
+      </tr>
+      <tr>
+        <td>Duvet, Blanket & Quilt Cleaning</td>
+        <td>Deep cleaning for bulky items</td>
+      </tr>
+      <tr>
+        <td>Ironing & Pressing</td>
+        <td>Crisp, professional finish</td>
+      </tr>
+      <tr>
+        <td>Curtains & Special Items</td>
+        <td>Careful handling for delicates & home textiles</td>
+      </tr>
     </table>
     <p>Turnaround: 24-48 hours after pickup. Free pickup & delivery anywhere in Nakuru.</p>
   </section>
 
-  <section style="text-align:center;">
+  <section style="text-align: center;">
     <h2>Why Choose Super Machine Wash?</h2>
-    <p>✔ Free pickup & delivery<br>✔ 24-48 hour service<br>✔ Professional handling<br>✔ Affordable & reliable in Nakuru</p>
+    <p>
+      ✔ Free pickup & delivery across Nakuru<br>
+      ✔ 24-48 hour fast service<br>
+      ✔ Professional handling & quality results<br>
+      ✔ Affordable & reliable – customer friendly prices
+    </p>
   </section>
 
   <footer>
