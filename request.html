@@ -3,53 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Request Pickup - Super Machine Laundry</title>
-  <style> /* Reuse same styles from index */ 
-    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; }
+  <title>Request Free Pickup - Super Machine Wash</title>
+  <style>
+    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; --accent: #25D366; }
     body { font-family: Arial, sans-serif; margin:0; padding:0; background: var(--light); color: var(--dark); }
-    header, nav, footer { /* copy from index */ }
-    form { max-width:600px; margin:2rem auto; padding:1rem; background:white; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    label { display:block; margin:1rem 0 0.3rem; font-weight:bold; }
-    input, select, textarea { width:100%; padding:0.7rem; margin-bottom:1rem; border:1px solid #ccc; border-radius:4px; }
-    .btn { /* copy */ }
+    header { background: var(--primary); color:white; text-align:center; padding:1.5rem 1rem; }
+    nav { background:#0056b3; padding:1rem; text-align:center; }
+    nav a { color:white; margin:0 1rem; text-decoration:none; font-weight:bold; }
+    section { padding:2rem 1rem; max-width:800px; margin:auto; }
+    form { background:white; padding:2rem; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+    label { display:block; margin:1.2rem 0 0.4rem; font-weight:bold; }
+    input, select, textarea { width:100%; padding:0.8rem; border:1px solid #ccc; border-radius:4px; box-sizing:border-box; }
+    .btn { background:var(--primary); color:white; padding:1rem; border:none; border-radius:5px; font-size:1.1rem; cursor:pointer; width:100%; margin-top:1rem; }
+    .btn:hover { background:#0056b3; }
+    footer { background:var(--dark); color:white; text-align:center; padding:1rem; margin-top:2rem; }
   </style>
 </head>
 <body>
 
-  <!-- Copy header and nav from index.html here -->
+  <header>
+    <h1>Super Machine Wash</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="request.html">Request Pickup</a>
+    <a href="track.html">Track Order</a>
+  </nav>
 
   <section>
-    <h2>Request Laundry Pickup</h2>
+    <h2>Request Free Pickup & Delivery</h2>
+    <p>We offer free pickup anywhere in Nakuru — fill in your details and we'll get in touch to schedule.</p>
+    
     <form id="requestForm">
       <label for="name">Full Name *</label>
       <input type="text" id="name" required>
 
       <label for="phone">Phone / WhatsApp *</label>
-      <input type="tel" id="phone" required>
+      <input type="tel" id="phone" required placeholder="e.g., 0717677811">
 
-      <label for="address">Pickup Address *</label>
-      <textarea id="address" rows="3" required></textarea>
+      <label for="address">Pickup Address in Nakuru *</label>
+      <textarea id="address" rows="3" required placeholder="e.g., Section 58, Milimani, or your estate"></textarea>
 
       <label for="date">Preferred Pickup Date</label>
       <input type="date" id="date">
 
-      <label for="weight">Estimated Weight (kg)</label>
-      <input type="number" id="weight" min="1" step="0.5">
-
-      <label for="service">Service Type</label>
-      <select id="service">
-        <option>Standard (KES 150/kg)</option>
-        <option>Express (KES 180/kg)</option>
-      </select>
-
-      <label for="scent">Scent Preference</label>
-      <select id="scent">
-        <option>Rose (Standard)</option>
-        <option>Premium (+KES 50)</option>
-      </select>
+      <label for="items">Items / Description</label>
+      <textarea id="items" rows="3" placeholder="e.g., 5kg clothes, 1 duvet, ironing only..."></textarea>
 
       <label for="instructions">Special Instructions</label>
-      <textarea id="instructions" rows="4" placeholder="e.g., No fabric softener, delicate fabrics..."></textarea>
+      <textarea id="instructions" rows="4" placeholder="e.g., No fabric softener, delicate care, heavy soil..."></textarea>
 
       <button type="submit" class="btn">Submit Request</button>
     </form>
@@ -58,15 +61,21 @@
   <script>
     document.getElementById('requestForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const orderId = 'SM-' + Math.floor(10000 + Math.random() * 90000); // Mock ID
-      alert(`Thank you! Your request has been submitted.\nOrder ID: ${orderId}\nWe'll contact you soon to confirm pickup.\n\nTrack your order at: track.html using this ID.`);
-      // Optional: Save to localStorage for demo tracking
-      localStorage.setItem(orderId, JSON.stringify({status: 'Pending', steps: ['Pending', 'Picked Up', 'Washing', 'Packing', 'Delivered']}));
+      const orderId = 'SMW-' + Math.floor(10000 + Math.random() * 90000);
+      alert(`Thank you! Your request has been submitted.\n\nOrder ID: ${orderId}\nWe'll contact you soon via WhatsApp/call to confirm pickup.\n\nTrack progress here: track.html using your Order ID.`);
+      
+      // Save mock data to localStorage for tracking demo
+      localStorage.setItem(orderId, JSON.stringify({
+        status: 'Pending',
+        steps: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered']
+      }));
       this.reset();
     });
   </script>
 
-  <!-- Copy footer here -->
+  <footer>
+    <p>© 2026 Super Machine Wash | Nakuru, Kenya | Call/WhatsApp: +254 717 677 811</p>
+  </footer>
 
 </body>
 </html>
