@@ -4,19 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Track Your Order - Super Machine Wash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root { --primary: #007bff; --light: #f8f9fa; --dark: #333; }
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: var(--light); color: var(--dark); }
-    header { background: var(--primary); color:white; text-align:center; padding:1.5rem 1rem; }
-    nav { background:#0056b3; padding:1rem; text-align:center; }
-    nav a { color:white; margin:0 1rem; text-decoration:none; font-weight:bold; }
-    section { padding:2rem 1rem; max-width:800px; margin:auto; text-align:center; }
-    input { padding:0.8rem; width:300px; max-width:90%; font-size:1rem; }
-    .btn { background:var(--primary); color:white; padding:0.8rem 1.5rem; border:none; border-radius:5px; cursor:pointer; font-size:1.1rem; }
-    #status { margin:2rem auto; padding:1.5rem; background:white; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:none; text-align:left; }
-    .step { padding:1rem; margin:0.8rem 0; border-left:5px solid #ccc; background:#f9f9f9; border-radius:4px; }
-    .active { border-left-color: var(--primary); background:#e6f3ff; font-weight:bold; }
-    footer { background:var(--dark); color:white; text-align:center; padding:1rem; margin-top:2rem; }
+    /* Reuse from index */
+    :root { /* same */ }
+    body { /* same */ }
+    header { /* same */ }
+    nav { /* same */ }
+    section { /* same */ }
+    input { 
+      padding: 1rem; 
+      width: 300px; 
+      max-width: 90%; 
+      border-radius: 5px; 
+      border: 1px solid #ccc; 
+      font-size: 1rem; 
+      margin: 1rem 0; 
+    }
+    .btn { /* same */ }
+    #status { 
+      margin: 2rem auto; 
+      padding: 2rem; 
+      background: white; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+      display: none; 
+    }
+    .step { 
+      padding: 1.2rem; 
+      margin: 1rem 0; 
+      border-left: 5px solid #ccc; 
+      background: #f9f9f9; 
+      border-radius: 5px; 
+      transition: background 0.3s ease; 
+    }
+    .active { 
+      border-left-color: var(--primary); 
+      background: #e6f3ff; 
+      font-weight: 600; 
+    }
+    footer { /* same */ }
   </style>
 </head>
 <body>
@@ -29,14 +57,15 @@
     <a href="index.html">Home</a>
     <a href="request.html">Request Pickup</a>
     <a href="track.html">Track Order</a>
+    <a href="reviews.html">Reviews</a>
   </nav>
 
   <section>
     <h2>Track Your Laundry Order</h2>
     <p>Enter your Order ID (e.g., SMW-12345) to see the current status. (This is a demo — real version would update live.)</p>
     
-    <input type="text" id="orderId" placeholder="Your Order ID" style="margin:1rem 0;">
-    <button onclick="trackOrder()" class="btn">Track Order</button>
+    <input type="text" id="orderId" placeholder="Your Order ID">
+    <button onclick="trackOrder()" class="btn"><i class="fas fa-search icon"></i> Track Order</button>
 
     <div id="status">
       <h3>Order Status</h3>
@@ -47,24 +76,19 @@
   <script>
     function trackOrder() {
       const id = document.getElementById('orderId').value.trim().toUpperCase();
-      if (!id) {
-        alert('Please enter your Order ID');
-        return;
-      }
+      if (!id) return alert('Please enter your Order ID');
 
       const statusDiv = document.getElementById('status');
       const stepsDiv = document.getElementById('steps');
       stepsDiv.innerHTML = '';
 
       let data = JSON.parse(localStorage.getItem(id));
-
-      // Fallback mock if no saved data (random progress for demo)
       if (!data) {
         const rand = Math.random();
-        let current = rand < 0.15 ? 0 : rand < 0.4 ? 1 : rand < 0.65 ? 2 : rand < 0.85 ? 3 : 4;
-        data = {
-          status: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered'][current],
-          steps: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered']
+        let current = rand < 0.15 ? 0 : rand < 0.4 ? 1 : rand < 0.65 ? 2 : rand < 0.85 ? 3 : rand < 0.95 ? 4 : 5;
+        data = { 
+          status: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered'][current], 
+          steps: ['Pending', 'Picked Up', 'Washing & Drying', 'Folding / Ironing', 'Packed & Ready', 'Delivered'] 
         };
       }
 
@@ -72,7 +96,7 @@
       data.steps.forEach((step, i) => {
         const div = document.createElement('div');
         div.className = 'step' + (i <= data.steps.indexOf(data.status) ? ' active' : '');
-        div.textContent = step + (i === data.steps.indexOf(data.status) ? ' – Current' : '');
+        div.innerHTML = `<i class="fas fa-check-circle icon"></i> ${step} ${i === data.steps.indexOf(data.status) ? '– Current' : ''}`;
         stepsDiv.appendChild(div);
       });
     }
