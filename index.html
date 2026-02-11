@@ -4,95 +4,120 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Super Machine Wash - Premium Laundry in Nakuru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root {
-      --primary: #007bff;
-      --light: #f8f9fa;
-      --dark: #333;
-      --accent: #25D366;     /* WhatsApp green */
+    :root { 
+      --primary: #007bff; 
+      --secondary: #0056b3; 
+      --light: #f8f9fa; 
+      --dark: #333; 
+      --accent: #25D366; 
+      --gradient: linear-gradient(to bottom, #e9f5ff, #ffffff); 
     }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: var(--light); 
+      color: var(--dark); 
+      line-height: 1.6; 
     }
-    header {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+    header { 
+      background: var(--primary); 
+      color: white; 
+      text-align: center; 
+      padding: 3rem 1rem; 
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    header h1 { 
+      margin: 0; 
+      font-size: 2.8rem; 
+      font-weight: 700; 
     }
-    nav {
-      background: #0056b3;
-      padding: 1rem;
-      text-align: center;
+    nav { 
+      background: var(--secondary); 
+      padding: 1rem; 
+      text-align: center; 
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
     }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
+    nav a { 
+      color: white; 
+      margin: 0 1.5rem; 
+      text-decoration: none; 
+      font-weight: 600; 
+      transition: color 0.3s ease; 
     }
-    section {
-      padding: 2rem 1rem;
-      max-width: 1000px;
-      margin: auto;
+    nav a:hover { 
+      color: #ffd700; 
     }
-    .hero {
-      background: #e9f5ff;
-      text-align: center;
-      padding: 3rem 1rem;
+    section { 
+      padding: 3rem 1rem; 
+      max-width: 1200px; 
+      margin: auto; 
+      opacity: 0; 
+      transform: translateY(20px); 
+      animation: fadeIn 0.8s forwards; 
     }
-    .btn {
-      background: var(--primary);
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    .hero { 
+      background: var(--gradient); 
+      text-align: center; 
+      padding: 4rem 1rem; 
+      border-bottom: 1px solid #ddd; 
     }
-    .btn:hover {
-      background: #0056b3;
+    .btn { 
+      background: var(--primary); 
+      color: white; 
+      padding: 1rem 2rem; 
+      border: none; 
+      border-radius: 5px; 
+      font-size: 1.2rem; 
+      cursor: pointer; 
+      text-decoration: none; 
+      display: inline-block; 
+      transition: background 0.3s ease, transform 0.2s ease; 
     }
-    .whatsapp-btn {
-      background: var(--accent);
+    .btn:hover { 
+      background: var(--secondary); 
+      transform: scale(1.05); 
     }
-    .whatsapp-btn:hover {
-      background: #128C7E;
+    .whatsapp-btn { 
+      background: var(--accent); 
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
+    .whatsapp-btn:hover { 
+      background: #128C7E; 
     }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 0.8rem;
-      text-align: left;
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin: 2rem 0; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
     }
-    th {
-      background: #eee;
+    th, td { 
+      border: 1px solid #ddd; 
+      padding: 1rem; 
+      text-align: left; 
     }
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
+    th { 
+      background: #eee; 
+      font-weight: 600; 
     }
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      nav a { display: block; margin: 0.5rem 0; }
+    .icon { margin-right: 0.5rem; color: var(--primary); }
+    footer { 
+      background: var(--dark); 
+      color: white; 
+      text-align: center; 
+      padding: 1.5rem; 
+      margin-top: 3rem; 
+    }
+    @media (max-width: 768px) { 
+      header h1 { font-size: 2.2rem; } 
+      nav a { margin: 0 0.8rem; font-size: 0.9rem; } 
+      section { padding: 2rem 1rem; } 
     }
   </style>
 </head>
@@ -113,52 +138,31 @@
 
   <section class="hero">
     <h2>Laundry Made Easy in Nakuru</h2>
-    <p>We pick up, wash, dry, fold, iron & deliver — you relax!<br>
-       Free pickup & delivery across Nakuru. Fast 24-48 hour turnaround.</p>
-    <a href="request.html" class="btn">Request Free Pickup Now</a>
+    <p>We pick up, wash, dry, fold, iron & deliver — you relax! Free pickup & delivery across Nakuru. Fast 24-48 hour turnaround.</p>
+    <a href="request.html" class="btn"><i class="fas fa-truck icon"></i> Request Free Pickup Now</a>
     <br><br>
-    <a href="https://wa.me/254717677811?text=Hi%20Super%20Machine%20Wash!%20I'd%20like%20to%20request%20a%20free%20pickup." 
-       class="btn whatsapp-btn">
-       Chat on WhatsApp
-    </a>
+    <a href="https://wa.me/254717677811?text=Hi%20Super%20Machine%20Wash!%20I'd%20like%20to%20request%20a%20free%20pickup." class="btn whatsapp-btn"><i class="fab fa-whatsapp icon"></i> Chat on WhatsApp</a>
   </section>
 
   <section id="services">
     <h2>Our Professional Services</h2>
     <p>We handle your laundry with care at customer-friendly prices. Premium care without lifting a finger!</p>
     <table>
-      <tr>
-        <th>Service</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td>Wash & Fold</td>
-        <td>Fresh, clean, neatly folded — perfect everyday laundry</td>
-      </tr>
-      <tr>
-        <td>Duvet, Blanket & Quilt Cleaning</td>
-        <td>Deep cleaning for bulky items</td>
-      </tr>
-      <tr>
-        <td>Ironing & Pressing</td>
-        <td>Crisp, professional finish</td>
-      </tr>
-      <tr>
-        <td>Curtains & Special Items</td>
-        <td>Careful handling for delicates & home textiles</td>
-      </tr>
+      <tr><th>Service</th><th>Description</th><th>Price</th></tr>
+      <tr><td>Wash & Fold</td><td>Fresh, clean, neatly folded — perfect everyday laundry</td><td>From KSh 130/kg</td></tr>
+      <tr><td>Duvet, Blanket & Quilt Cleaning</td><td>Deep cleaning for bulky items</td><td>From KSh 400</td></tr>
+      <tr><td>Ironing & Pressing</td><td>Crisp, professional finish</td><td>Included in wash</td></tr>
+      <tr><td>Curtains & Special Items</td><td>Careful handling for delicates & home textiles</td><td>Custom quote</td></tr>
     </table>
     <p>Turnaround: 24-48 hours after pickup. Free pickup & delivery anywhere in Nakuru.</p>
   </section>
 
   <section style="text-align: center;">
     <h2>Why Choose Super Machine Wash?</h2>
-    <p>
-      ✔ Free pickup & delivery across Nakuru<br>
-      ✔ 24-48 hour fast service<br>
-      ✔ Professional handling & quality results<br>
-      ✔ Affordable & reliable – customer friendly prices
-    </p>
+    <p><i class="fas fa-check-circle icon"></i> Free pickup & delivery across Nakuru<br>
+       <i class="fas fa-clock icon"></i> 24-48 hour fast service<br>
+       <i class="fas fa-star icon"></i> Professional handling & quality results<br>
+       <i class="fas fa-wallet icon"></i> Affordable & reliable – customer friendly prices</p>
   </section>
 
   <footer>
